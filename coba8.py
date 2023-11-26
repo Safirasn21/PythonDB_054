@@ -38,7 +38,7 @@ def tampilkan():
     nama_siswa = e1.get()
     Biologi = e2.get()
     Fisika = e3.get()
-    Inggris = (e4.get()
+    Inggris = e4.get()
 
     prediksi = prediksi_fakultas(Biologi, Fisika, Inggris)
 
