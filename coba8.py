@@ -2,10 +2,13 @@ import tkinter as tk
 from tkinter import messagebox
 import sqlite3
 
+# Parameter nya tergantung isi dari content 
 def simpan_data_ke_sqlite(nama_siswa, Biologi, Fisika, Inggris, Prediksi_Fakultas):
+    # Connect Database
     conn = sqlite3.connect("sqlite3.db")
     cursor = conn.cursor()
-    
+
+    # Membuat Table jika Table belum di buat
     cursor.execute('''CREATE TABLE IF NOT EXISTS nilai_siswa
                     (No_Urut INTEGER PRIMARY KEY AUTOINCREMENT, 
                     nama_siswa TEXT, 
@@ -13,13 +16,15 @@ def simpan_data_ke_sqlite(nama_siswa, Biologi, Fisika, Inggris, Prediksi_Fakulta
                     Fisika INTEGER,
                     Inggris INTEGER,
                     Prediksi_Fakultas TEXT)''')
-    
+
+    # Insert Data kedalam Table hasil_prediksi
     cursor.execute("INSERT INTO nilai_siswa (nama_siswa, Biologi, Fisika, Inggris, Prediksi_Fakultas) VALUES (?, ?, ?, ?, ?)",
                    (nama_siswa, Biologi, Fisika, Inggris, Prediksi_Fakultas))
 
     conn.commit()
     conn.close()
 
+#Fungsi prediksi fakultas
 def prediksi_fakultas(Biologi, Fisika, Inggris):
     if Biologi > Fisika and Biologi > Inggris:
         return "Kedokteran"
@@ -28,11 +33,12 @@ def prediksi_fakultas(Biologi, Fisika, Inggris):
     else:
         return "Bahasa"
 
+#Fungsi Menampilkan
 def tampilkan():
     nama_siswa = e1.get()
-    Biologi = int(e2.get())
-    Fisika = int(e3.get())
-    Inggris = int(e4.get())
+    Biologi = e2.get()
+    Fisika = e3.get()
+    Inggris = (e4.get()
 
     prediksi = prediksi_fakultas(Biologi, Fisika, Inggris)
 
